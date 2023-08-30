@@ -45,6 +45,12 @@ bool RouteSegments::StopForDestination() const { return stop_for_destination_; }
 void RouteSegments::SetStopForDestination(bool stop_for_destination) {
   stop_for_destination_ = stop_for_destination;
 }
+  //  |----------------------------------------------|   <- 车道
+  //  A                 B              C              D   <- 航点
+  //  |-----------------|--------------|--------------|   <- 车道片段
+  //  ^                 ^              ^              ^
+  //  起始位置           航点位置      航点位置      结束位置
+  //这段代码通过比较车道片段和车道航点的各个属性，判断给定的车道航点是否在给定的车道片段内部。它考虑了车道ID、位置以及数值精度问题，以确保准确判断是否在同一车道上。
 
 bool RouteSegments::WithinLaneSegment(const LaneSegment &lane_segment,
                                       const LaneWaypoint &waypoint) {
